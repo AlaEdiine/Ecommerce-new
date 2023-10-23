@@ -1,0 +1,344 @@
+.home
+{
+    display: flex;
+    padding: 20px;
+    width: 100%;
+    height: 100vh;
+}
+.container-1
+{
+    position: relative;
+    width: 35%;
+    height: 95vh;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+/* ///////////////////////////// Title  Saphir /////////////////////// */
+.title-box
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.title
+{
+    display: flex;
+    font-size:xx-large;
+    font-weight: 900;
+    padding: 30px 0 0 5px;
+}
+.p-title:nth-child(1)
+{
+    color: rgb(224, 21, 174);
+}
+.p-title:nth-child(2)
+{
+    color: rgb(21, 177, 224);
+}
+.p-title:nth-child(3)
+{
+    color: rgb(68, 224, 21);
+}
+.p-title:nth-child(4)
+{
+    color: rgb(224, 79, 21);
+}
+.p-title:nth-child(5)
+{
+    color: rgb(210, 224, 21);
+}
+.p-title:nth-child(6)
+{
+    color: rgb(236, 228, 234);
+}
+.title-description
+{
+    color: #FFF;
+    font-size: larger;
+    font-weight: 500;
+}
+.description-box
+{
+    padding: 20px 0 0 30px;
+    display: flex;
+    flex-wrap: wrap;
+    cursor: pointer;
+}
+.p-description:nth-child(1) ,
+.p-description:nth-child(2) ,
+.p-description:nth-child(3) ,
+.p-description:nth-child(4)
+{
+    padding: 10px;
+    text-align: center;
+    color: rgb(160, 158, 156);
+    border-radius: 10px;
+    font-size: small;
+    width: 45%;
+    margin: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: 0.3s;
+}
+.p-description:nth-child(5)
+{
+    padding: 10px;
+    text-align: center;
+    color: rgb(160, 158, 156);
+    border-radius: 10px;
+    font-size: small;
+    width: 92%;
+    margin: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: 0.3s;
+}
+.p-description:hover
+{
+    transform: scale(1.05);
+    color: aliceblue;
+}
+/* ///////////////////////////// Title Interface /////////////////////// */
+.interface-box
+{
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0 0 40px;
+}
+.p-interface:nth-child(1)
+{
+    color: #FFF;
+    font-size:x-large;
+    font-weight: 600;
+    padding: 0 0 10px 0;
+}
+.p-interface:nth-child(2) ,
+.p-interface:nth-child(3) ,
+.p-interface:nth-child(4) ,
+.p-interface:nth-child(5) ,
+.p-interface:nth-child(6) ,
+.p-interface:nth-child(7)
+{
+    padding: 0 0 0 30px;
+    border-left: 5px solid aqua;
+    margin: 5px;
+    font-size: small;
+    color: rgb(160, 158, 156);
+}
+/* ///////////////////////////// Image /////////////////////// */
+.image-box
+{
+    display: flex;
+    padding: 15px 0 0 40px;
+    position: relative;
+}
+.image-title
+{
+    position: relative;
+    padding: 5px;
+    color: #fff;
+    font-size: larger;
+    font-weight: 500;
+    width: 20%;
+}
+.image
+{
+    position: relative;
+    width: 70%;
+    height: 90px;
+    border-radius: 10px;
+    background-color: #38e416;
+    background-size: cover;
+    background-position: center;
+ 
+}
+/* ///////////////////////////// Container Numero-2 /////////////////////// */
+.container-2
+{
+    display: flex;
+    width: 65%;
+    position: relative;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.box-1 
+{
+    position: relative;
+    width: 500px;
+    height: 400px;
+    background : linear-gradient( #38e416 , rgba(157, 9, 231, 0.952));
+    border-radius: 40% 60% 53% 47% / 54% 34% 66% 46% ;
+    box-shadow: 1px 1px 50px 20px rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.box-1-signup 
+{
+    position: relative;
+    width: 500px;
+    height: 440px;
+    background : linear-gradient( #16aae4 , rgba(230, 24, 24, 0.952));
+    border-radius: 40% 60% 53% 47% / 54% 34% 66% 46% ;
+    box-shadow: 1px 1px 50px 20px rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.box-1-forgetpassword
+{
+    position: relative;
+    width: 500px;
+    height: 400px;
+    background : linear-gradient( #b7e416 , rgba(231, 53, 9, 0.952));
+    border-radius: 40% 60% 53% 47% / 54% 34% 66% 46% ;
+    box-shadow: 1px 1px 50px 20px rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.box-1:hover , .box-1-signup:hover , .box-1-forgetpassword:hover
+{
+    border-radius: 60% 40% 53% 47% / 33% 47% 53% 67% ;
+}
+.p
+{
+    color: #FFF;
+    font-size: x-large;
+    font-weight: 700;
+}
+.form
+{
+    margin: 15px 30px 30px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.label
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.input
+{
+    padding: 10px;
+    outline: none;
+    margin: 10px;
+    color: #FFF;
+    opacity: 0.8;
+    font-weight: 400;
+    background:  rgba(255, 255, 255, 0.1);;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+::placeholder
+{
+    color: #FFF;
+    opacity: 0.6;
+}
+.VisibilityOffIcon
+{
+    position: absolute;
+    visibility: hidden;
+    right: 15px;
+    color: #FFF;
+    opacity: 0.5;
+    font-size: small;
+}
+.error
+{
+    border-radius: 10px;
+    color: #aa2626;
+    padding: 10px;
+    width: 250px;
+    font-weight: 800;
+    font-size: larger;
+    cursor: pointer;
+}
+.button
+{
+    background: #000;
+    border-radius: 10px;
+    color: #FFF;
+    padding: 10px;
+    width: 150px;
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: larger;
+    cursor: pointer;
+}
+.box-multiple
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 65%;
+}
+/* ///////////////////////////// Sign In /////////////////////// */
+.box-2
+{
+    position: relative;
+    width: 160px;
+    height: 140px;
+    background : linear-gradient( #16aae4 , rgba(230, 24, 24, 0.952));
+    border-radius: 49% 51% 62% 38% / 44% 47% 53% 56% ;
+    box-shadow: 1px 1px 50px 20px rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.box-2-signin
+{
+    position: relative;
+    width: 160px;
+    height: 140px;
+    background : linear-gradient( #38e416 , rgba(157, 9, 231, 0.952));
+    border-radius: 49% 51% 62% 38% / 44% 47% 53% 56% ;
+    box-shadow: 1px 1px 50px 20px rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+    cursor: pointer;  
+}
+.box-2:hover , .box-2-signin:hover
+{
+    border-radius: 31% 69% 49% 51% / 56% 32% 68% 44% ;
+}
+
+/* ///////////////////////////// Forget Password /////////////////////// */
+.box-3
+{
+    position: relative;
+    width: 200px;
+    height: 130px;
+    background : linear-gradient( #b7e416 , rgba(231, 53, 9, 0.952));
+    border-radius: 49% 51% 62% 38% / 44% 47% 53% 56% ;
+    box-shadow: 1px 1px 50px 20px rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.box-3:hover
+{
+    border-radius: 68% 32% 70% 30% / 47% 48% 52% 53%   ;
+}
