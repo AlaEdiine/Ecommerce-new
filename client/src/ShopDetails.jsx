@@ -15,7 +15,6 @@ const ShopDetails = () => {
 
   return (
     <div>
-      <Menu></Menu>
       <SnackbarProvider autoHideDuration={2500} />
       {/* Breadcrumb Start */}
       <div className="container-fluid">
@@ -367,9 +366,6 @@ const ShopDetails = () => {
         </div>
       </div>
       {/* Shop End */}
-      {/* Footer Start */}
-<Footer></Footer>
-      {/* Footer End */}
 
     </div>
   );

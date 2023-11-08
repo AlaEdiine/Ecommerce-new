@@ -1,9 +1,8 @@
 
 
 import { createContext, useEffect, useState } from "react";
-import Succes from "../component/Snackbar/Succes";
-import Error from "../component/Snackbar/Error";
-import Axios from "../api/axios";
+import Message from "@/component/Snackbar/Message";
+import Axios from "@/api/axios";
 
 
 
@@ -21,25 +20,30 @@ const Context = ({ children }) => {
   const [persist, setPersist] = useState(false);
   const [LocalStorage , setLocalStorage] = useState([])
   const [dataLocalStorage , setDataLocalStorage] = useState(JSON.parse(localStorage.getItem('data')))
-
+  const [loading, setloading] = useState(false);
+  
+console.log('localStorage: ' +dataLocalStorage);
 
   useEffect(() => {
     const token = async ()=> {
+      setloading(true)
         try{
        const {data} = await Axios.get("/USER/GET")
-            setPersist(true);
-            setUser(data);
-        }
-         catch (err) {
+       setloading(false)
+       setPersist(true);
+       setUser(data);
+      }
+      catch (err) {
+           setloading(false)
           console.log(err.message);
           console.log(err.response.status);
           setPersist(true);
         }
       }
-     token()
+    return() => token()
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-console.log(user);
+console.log('user: ' +user);
 
 
   const [cartitems, setcartitems] = useState([]);
@@ -64,7 +68,7 @@ console.log(user);
 // ********
   const decreaseQte = (product , i) => {
     if(product.Qte <= 1) {
-      return Error("Please Verify Quantity !", "info");
+      return Message("Please Verify Quantity !", "info");
      }
     product.Qte--
     const listInvoice = [...cartitems]
@@ -78,7 +82,7 @@ console.log(user);
 // ********
   const addTocart = (product) => {
     if (cartitems.find((item) => item.id === product.id)) {
-      Error("Product Is Exisit Into Cart !", "error");
+      Message("Product Is Exisit Into Cart !", "error");
       return setcartitems;
     }
       const quantity = {
@@ -87,30 +91,32 @@ console.log(user);
       };    
       const newproduct = Object.assign(quantity, product);
       setcartitems([...cartitems, newproduct]);
-      Succes("Product Added To Cart With Succes !", "success");
+      Message("Product Added To Cart With Succes !", "success");
     };
 
 // ********  
 // Function Favorite Products
 // ********    
 var arr = []
+
 const Favorite = (item) =>{
-  if (dataLocalStorage.find((val) => val.id === item.id)) {
-    Error("Product Is Exisit In Favorite !", "error");  
+  if (dataLocalStorage?.find((val) => val.id === item.id)) {
+    Message("Product Is Exist In Favorite !", "error");  
     return dataLocalStorage;
   }
-  arr.push(item)
-  if(dataLocalStorage === null){
-    localStorage.setItem("data" , JSON.stringify(arr))
-    setDataLocalStorage(JSON.parse(localStorage.getItem('data')))
-   return  Succes("Product Added In Favorite !", "success");
-  
-  }else{
-    const newArr = [...dataLocalStorage , item]
-    localStorage.setItem("data" , JSON.stringify(newArr))
-    setDataLocalStorage(JSON.parse(localStorage.getItem('data')))
-    return  Succes("Product Added In Favorite !", "success");
+  else if(dataLocalStorage === null){
+    arr.push(item)
+  localStorage.setItem("data" , JSON.stringify(arr))
+  setDataLocalStorage(JSON.parse(localStorage.getItem('data')))
+  return  Message("Product Added In Favorite !", "success");
   }
+   else{
+    arr.push(item)
+     const newArr = [...dataLocalStorage ,...arr]
+   localStorage.setItem("data" , JSON.stringify(newArr))
+     setDataLocalStorage(JSON.parse(localStorage.getItem('data')))
+     return  Message("Product Added In Favorite !", "success");
+   }
 }
 
 
@@ -121,7 +127,7 @@ const Favorite = (item) =>{
     const removeTocart = (product) => {
       const newcart = cartitems.filter((p) => p.id !== product.id);
       setcartitems(newcart);
-      Succes("Product Removed With Succes !", "warning");
+      Message("Product Removed With Succes !", "warning");
     };
     
 // ********
@@ -140,6 +146,7 @@ const Favorite = (item) =>{
         setDataLocalStorage,
         user,
         setUser,
+        loading,
         persist, 
         setPersist,
         search,

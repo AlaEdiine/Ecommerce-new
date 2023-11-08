@@ -1,9 +1,7 @@
 import React, { useContext, useState } from "react";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "../css/style.css";
 import { ShopContext } from "../ShopContext/Shopcontext";
-import SignIn from "./Auth/SignIn";
-import SignUp from "./Auth/SignUp";
 import Avatar from "@mui/joy/Avatar";
 import Badge, { badgeClasses } from "@mui/joy/Badge";
 import Dropdown from "@mui/joy/Dropdown";
@@ -14,18 +12,9 @@ import Axios from "../api/axios";
 
 const Menus = () => {
   const valueContext = useContext(ShopContext);
+  console.log('localStorage: ' +valueContext.dataLocalStorage);
   const params = useLocation().pathname;
   const [colorBtn, setColorBtn] = useState(params);
-
-  const openSignin = () => {
-    valueContext.setsignin(true);
-    valueContext.setsignup(false);
-  };
-  const openSignup = () => {
-    valueContext.setsignin(false);
-    valueContext.setsignup(true);
-  };
-
   const logout = async() => {
     Axios.post('/logout/cookie').then((res)=> {
     console.log(res.data)
@@ -36,8 +25,6 @@ const Menus = () => {
 
   return (
     <div>
-      {valueContext.signin && <SignIn></SignIn>}
-      {valueContext.signup && <SignUp></SignUp>}
       {/* Topbar Start */}
       <div className="container-fluid">
         <div className="row bg-secondary py-1 px-xl-5">
@@ -50,31 +37,18 @@ const Menus = () => {
           </div>
           <div className="col-lg-6 text-center text-lg-right">
             <div className="d-inline-flex align-items-center">
-              {!valueContext.user ? (
+              {!valueContext?.user ? (
                 <div className="btn-group">
-                  <button
-                    type="button"
-                    className="btn btn-sm btn-light dropdown-toggle"
-                    data-toggle="dropdown"
+                  <Link to="/login"
+                    className="btn btn-sm btn-dark"
                   >
-                    My Account
-                  </button>
-                  <div className="dropdown-menu dropdown-menu-right">
-                    <button
-                      className="dropdown-item"
-                      type="button"
-                      onClick={openSignin}
-                    >
-                      Sign in
-                    </button>
-                    <button
-                      className="dropdown-item"
-                      type="button"
-                      onClick={openSignup}
-                    >
-                      Sign up
-                    </button>
-                  </div>
+                    Login
+                  </Link>
+                  <Link to="/register"
+                    className="btn btn-sm btn-light"
+                  >
+                    Register
+                  </Link>
                 </div>
               ) : (
                 <div className="btn-group">
@@ -361,7 +335,7 @@ const Menus = () => {
                   >
                     Contact
                   </Link>
-                  {!!valueContext.user && (
+                  {!!valueContext?.user && (
                     <Link
                       to="/order"
                       className={
@@ -381,9 +355,7 @@ const Menus = () => {
                       className="badge text-secondary border border-secondary rounded-circle"
                       style={{ paddingBottom: 2 }}
                     >
-                      {valueContext.dataLocalStorage !== null
-                        ? valueContext.dataLocalStorage.length
-                        : 0}
+                    {valueContext?.dataLocalStorage.length}
                     </span>
                   </Link>
                   <Link to="/cart" href className="btn px-0 ml-3">
@@ -392,7 +364,7 @@ const Menus = () => {
                       className="badge text-secondary border border-secondary rounded-circle"
                       style={{ paddingBottom: 2 }}
                     >
-                      {valueContext.cartitems.length}
+                      {valueContext?.cartitems.length}
                     </span>
                   </Link>
                 </div>

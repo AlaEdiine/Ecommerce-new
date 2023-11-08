@@ -1,10 +1,9 @@
 import React, { useContext } from 'react'
-import './css/style.css'
-import {ShopContext} from './ShopContext/Shopcontext'
-import Menu from './component/Menu'
+import '@/css/style.css'
+import {ShopContext} from '../../ShopContext/Shopcontext'
 import { SnackbarProvider } from "notistack";
 import { Link } from 'react-router-dom';
-import Footer from './component/Footer';
+
 
 
 const Cart = () => {
@@ -13,7 +12,6 @@ const Cart = () => {
 
   return (
 <div>
-  <Menu></Menu>
   <SnackbarProvider autoHideDuration={2500} />
   {/* Breadcrumb Start */}
   <div className="container-fluid">
@@ -108,9 +106,6 @@ const Cart = () => {
     </div>
   </div>
   {/* Cart End */}
-  {/* Footer Start */}
-<Footer></Footer>
-  {/* Footer End */}
 </div>
 
   )

@@ -1,11 +1,10 @@
 import React, { useContext } from 'react'
-import Menu from './component/Menu'
 import './css/style.css'
 import { ShopContext } from './ShopContext/Shopcontext'
 import { SnackbarProvider } from "notistack";
 import { products, recentproducts } from './data/Products'
 import { Link } from 'react-router-dom'
-import Footer from './component/Footer'
+
 
 
 const HomeAccount = () => {
@@ -14,7 +13,6 @@ const {addTocart , search } = useContext(ShopContext)
 
   return (
 <div>
-<Menu></Menu>
 <SnackbarProvider autoHideDuration={2500} />
   {/* Carousel Start */}
   <div className="container-fluid mb-3">
@@ -285,10 +283,6 @@ const {addTocart , search } = useContext(ShopContext)
     </div>
   </div>
   {/* Products End */}
-  {/* Vendor Start */}
-  {/* Footer Start */}
-<Footer></Footer>
-  {/* Footer End */}
 
 </div>
 

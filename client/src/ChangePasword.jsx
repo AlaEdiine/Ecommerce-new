@@ -1,7 +1,5 @@
 import { SnackbarProvider } from "notistack";
 import * as React from "react";
-import Footer from "./component/Footer";
-import Menu from "./component/Menu";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import Input from "@mui/joy/Input";
@@ -12,15 +10,16 @@ import Typography from "@mui/joy/Typography";
 import Key from "@mui/icons-material/Key";
 import Axios from "./api/axios";
 import { useState } from "react";
-import Succes from "./component/Snackbar/Succes";
-import Error from "./component/Snackbar/Error";
+import Message from "./component/Snackbar/Message";
+import { useNavigate } from "react-router";
 
 const ChangePasword = () => {
+  const navigate = useNavigate();
   const [value, setValue] = React.useState("");
   const minLength = 12;
   const [currentPassword, setCurrentPassword] = useState();
-  const [ConfirmPassword, setConfirmPassword] = useState();
   const [load, setLoad] = useState(false);
+
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
@@ -32,19 +31,21 @@ const ChangePasword = () => {
       });
       console.log(response);
       setLoad(false);
-      return Succes("Password updated with success" , "success")
+      return Message("Password updated with success" , "success")
     } catch (err) {
+      if(err.response.status === 401){
+       return navigate("/login");
+      }
       console.log(err.response.data.message);
       console.log(err.response.status);
-      return Error(err.response.data.message , "error")
+      return Message(err.response.data.message , "error")
     } finally {
       setLoad(false);
     }
   };
   return (
     <div>
-      <Menu></Menu>
-      <SnackbarProvider autoHideDuration={2500} />
+      <SnackbarProvider autoHideDuration={3500} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} maxSnack={3} />
       {/* Navbar End */}
       {/* Breadcrumb Start */}
       <div className="container-fluid">
@@ -151,9 +152,6 @@ const ChangePasword = () => {
       </div>
 
       {/* Contact End */}
-      {/* Footer Start */}
-      <Footer></Footer>
-      {/* Footer End */}
     </div>
   );
 };

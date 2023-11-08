@@ -16,7 +16,7 @@ router.put('/UPDATE/:id' , PhotoUpload.single("image"), UPDATE_USER)
 router.delete('/DELETE/:id', DELETE_USER)
 
 // GET USER
-router.get('/GET', verifyToken , GET_USER)
+router.get('/GET', verifyTokenAdmin , GET_USER)
 
 // GET USER
 router.get('/GET/:id', verifyToken , GET_USER_BY_ID)

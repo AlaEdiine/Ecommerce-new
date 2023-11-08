@@ -23,7 +23,6 @@ const Favorite = () => {
 
   return (
 <div>
- <Menu></Menu>
  <SnackbarProvider autoHideDuration={2500} />
   {/* Navbar End */}
   {/* Breadcrumb Start */}
@@ -152,9 +151,6 @@ const Favorite = () => {
 
   </div>
   {/* Shop Detail End */}
-  {/* Footer Start */}
-<Footer></Footer>
-  {/* Footer End */}
 
 </div>
 

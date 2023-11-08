@@ -1,10 +1,7 @@
 import { SnackbarProvider } from 'notistack'
 import React, { useRef, useState } from 'react'
-import Footer from './component/Footer'
-import Menu from './component/Menu'
-import Error from './component/Snackbar/Error'
+import Message from '../../component/Snackbar/Message'
 import emailjs from "@emailjs/browser";
-import Succes from './component/Snackbar/Succes'
 import { Navigate } from 'react-router'
 
 
@@ -21,7 +18,7 @@ const Contact = () => {
   const sendEmail = (e) => {
     e.preventDefault();
     if ((name === null) || (email === null) || (subject === null) || (msg === null)) {
-     return Error("Remplir toutes les champs !", "error");
+     return Message("Remplir toutes les champs !", "error");
     }
 
     emailjs
@@ -39,14 +36,17 @@ const Contact = () => {
           console.log(error.text);
         }
       );
+      setName(null)
+      setEmail(null)
+      setSubject(null)
+      setMsg(null)
     e.target.reset();
-    Succes("Email Send with Succes", "success");
+    Message("Email Send with Succes", "success");
     return <Navigate to='http://localhost:3000/shop'></Navigate>
   };
   return (
     
     <div>
-<Menu></Menu>
 <SnackbarProvider autoHideDuration={2500} />
   {/* Navbar End */}
   {/* Breadcrumb Start */}
@@ -94,20 +94,17 @@ const Contact = () => {
       </div>
       <div className="col-lg-5 mb-5">
         <div className="bg-light p-30 mb-30">
-          <iframe style={{width: '100%', height: 250}} src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd" frameBorder={0} allowFullScreen aria-hidden="false" tabIndex={0} />
+          <iframe style={{width: '100%', height: 250}} src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d17578.732369634454!2d10.089232377708479!3d35.67495795681215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12fdc54531303f79%3A0xbba4cacca78e555e!2sKairouan!5e0!3m2!1sfr!2stn!4v1698946828447!5m2!1sfr!2stn" frameBorder={0} allowFullScreen aria-hidden="false" tabIndex={0} />
         </div>
         <div className="bg-light p-30 mb-3">
-          <p className="mb-2"><i className="fa fa-map-marker-alt text-primary mr-3" />123 Street, New York, USA</p>
-          <p className="mb-2"><i className="fa fa-envelope text-primary mr-3" />info@example.com</p>
-          <p className="mb-2"><i className="fa fa-phone-alt text-primary mr-3" />+012 345 67890</p>
+          <p className="mb-2"><i className="fa fa-map-marker-alt text-primary mr-3" />Cité balaoui 2 N°29, kairouan 3182, Tunisia</p>
+          <p className="mb-2"><i className="fa fa-envelope text-primary mr-3" />alaeddine.alouii@gmail.com</p>
+          <p className="mb-2"><i className="fa fa-phone-alt text-primary mr-3" />+216 99 14 99 26</p>
         </div>
       </div>
     </div>
   </div>
   {/* Contact End */}
-  {/* Footer Start */}
-<Footer></Footer>
-  {/* Footer End */}
 </div>
 
   )

@@ -14,7 +14,6 @@ import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
 import { ShopContext } from "./ShopContext/Shopcontext";
 import { useContext } from "react";
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import { styled } from '@mui/material/styles';
 const VisuallyHiddenInput = styled('input')({
@@ -33,7 +32,6 @@ const Profile = () => {
 
   return (
     <div>
-      <Menu></Menu>
       <SnackbarProvider autoHideDuration={2500} />
       {/* Navbar End */}
       {/* Breadcrumb Start */}
@@ -179,9 +177,6 @@ const Profile = () => {
       </div>
 
       {/* Contact End */}
-      {/* Footer Start */}
-      <Footer></Footer>
-      {/* Footer End */}
     </div>
   );
 };

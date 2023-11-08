@@ -1,12 +1,10 @@
 import React, { useContext, useState } from "react";
-import Menu from "./component/Menu";
 import "./css/style.css";
 import { allproducts } from "./data/Products";
 import { SnackbarProvider } from "notistack";
 import { ShopContext } from "./ShopContext/Shopcontext";
 import { Link } from "react-router-dom";
 import Rating from '@mui/material/Rating';
-import Footer from "./component/Footer";
 
 const Products = () => {
  
@@ -25,7 +23,7 @@ const Products = () => {
     (produc) => produc.price < 500 && produc.price > 400
   );
 
-  const { addTocart, search } = useContext(ShopContext);
+  const { addTocart, search ,Favorite} = useContext(ShopContext);
 
   const [data, setdata] = useState(allproducts);
   const [color, setColor] = useState(null);
@@ -117,7 +115,6 @@ const Products = () => {
   }
   return (
     <div>
-      <Menu></Menu>
       <SnackbarProvider autoHideDuration={2500} />
       {/* Breadcrumb Start */}
       <div className="container-fluid">
@@ -487,7 +484,7 @@ const Products = () => {
                           >
                             <i className="fa fa-shopping-cart" />
                           </Link>
-                          <Link className="btn btn-outline-dark btn-square">
+                          <Link  onClick={()=> Favorite(item)} className="btn btn-outline-dark btn-square">
                             <i className="far fa-heart" />
                           </Link>
                            <Link to="/detail" state={item.id} className="btn btn-outline-dark btn-square">
@@ -564,9 +561,6 @@ const Products = () => {
         </div>
       </div>
       {/* Shop End */}
-      {/* Footer Start */}
-<Footer></Footer>
-      {/* Footer End */}
 
     </div>
   );

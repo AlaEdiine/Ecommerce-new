@@ -2,53 +2,81 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser"); // cookies
 const { UUSER } = require("../Models/_user");
+const { VERIFYUSER } = require("../Models/verifyUser");
 const { createError } = require("../Service/Error");
+const { GenerateToken } = require("../utils/GenerateToken");
+const crypto = require("crypto");
+const SendEmail = require("../utils/SendEmail");
 require("dotenv").config();
 
-//TODO: AJOUTER USER
+//TODO:
+/**----------------------------------------- 
+ *  @desc register nouveau user
+ *  @route /USER/AJOUTER
+ *  @method POST
+ *  @access public
+ -------------------------------------------*/
+
 module.exports.AJOUTER_USER = async (req, res, next) => {
   try {
     Data = req.body.form;
+    // check User exist or not
+    const result = await UUSER.findOne({ Email: Data.Email });
+    if (result) return next(createError(401, "This Email is Exist"));
 
     // Hash Password
     const salt = await bcrypt.genSalt(10);
     HashPassword = await bcrypt.hash(Data.Password, salt);
     const dataForm = { ...Data, Password: HashPassword };
 
-    // Search User
-    const result = await UUSER.findOne({ Email: Data.Email });
+    // Save in DB
+    const newuser = new UUSER(dataForm);
+    await newuser.save();
 
-    // if (result) return res.status(202).send({ message: "Email exist" });
-    if (result) return next(createError(401, "Email Exist"));
+    // Create token validation user and save it to DB
+    const verifyUser = new VERIFYUSER({
+      userId: newuser._id,
+      tokens: crypto.randomBytes(32).toString("hex"),
+      description : "Verify Account"
+    });
+    await verifyUser.save();
 
-    // Save User into Database
-    const document = await UUSER.insertMany(dataForm);
-    const Id = document[0]._id;
-    const FirstName = document[0].FirstName;
-    const isAdmin = document[0].isAdmin;
+    // Making the link
+    const link = `http://localhost:3000/user/${newuser._id}/verify/${verifyUser.tokens}`;
 
-    // Generate Token
-    const token = jwt.sign(
-      { id: Id, isAdmin: isAdmin },
-      process.env.SECRET_KEY_JWT
-    );
+    // Putting the link into an html template
+    const htmlTemplate = `<div>
+      <p>Click in the link below to verify your email </p>
+      <a href="${link}">Verify</a>
+    </div>`;
+
+    // Sending email in the user
+    await SendEmail(newuser.Email, "Verify your email", htmlTemplate);
+
+    // Response to the client
+    res
+      .status(201)
+      .json({
+        message: "We sent to you an email, please verify your email address",
+      });
+
+    const token = GenerateToken(newuser);
 
     return res
       .cookie("Token", token, { httpOnly: true, secure: true })
       .status(200)
-      .json({ name: FirstName, id: Id });
+      .json(newuser);
   } catch (err) {
     return next(err);
   }
 };
 
+
 //TODO: UPDATE USER
 module.exports.UPDATE_USER = async (req, res, next) => {
   try {
     /***************
-    ******
       VALIDATION
-    ****** 
     ****************/
     if (!req.file) {
       return res.status(400).json({ message: "No File Provided" });
@@ -56,7 +84,7 @@ module.exports.UPDATE_USER = async (req, res, next) => {
 
     const result = await UUSER.findByIdAndUpdate(
       req.params.id,
-      { $set: req.body , Photo : req.file.filename  },
+      { $set: req.body, Photo: req.file.filename },
       { new: true }
     ).select("-Password");
     if (!result) return next(createError(401, "Error Search"));
@@ -80,14 +108,12 @@ module.exports.DELETE_USER = async (req, res, next) => {
 
 //TODO: GET USER
 module.exports.GET_USER = async (req, res, next) => {
-  console.log(req.infoUser);
   try {
-    const result = await UUSER.findById({ _id: req.infoUser.id });
-    console.log(result);
-    if (!result) return next(createError(401, "Error Search"));
-    return res
-      .status(200)
-      .send(result);
+    const result = await UUSER.findById({ _id: req.infoUser.id }).select(
+      "-Password"
+    );
+    if (!result) return next(createError(401, "user not found"));
+    return res.status(200).send(result);
   } catch (err) {
     return next(err);
   }

@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import CircularProgress from "@mui/material/CircularProgress";
-import Axios from './api/axios'
-import Menu from './component/Menu'
-import './css/style.css'
-import { ShopContext } from './ShopContext/Shopcontext'
-import Footer from './component/Footer';
+import Axios from '../../api/axios'
+import '@/css/style.css'
+import { ShopContext } from '../../ShopContext/Shopcontext'
 import {loadStripe} from '@stripe/stripe-js';
+import Message from '../../component/Snackbar/Message';
+import { SnackbarProvider } from 'notistack';
 
 
 
@@ -14,6 +14,7 @@ const Checkout = () => {
 
  
   const valueContext = useContext(ShopContext)
+  console.log(valueContext.user);
   const [loading, setLoading] = useState(false);
   const [DATA, setDATA] = useState([]);
   const navigate = useNavigate()
@@ -69,7 +70,13 @@ const makePayment = async() =>{
 
   return (
 <div>
- <Menu></Menu>
+  <SnackbarProvider autoHideDuration={2500} />
+  {valueContext.user == null ? 
+  <>
+  <p>Not found user please login</p>
+  </>
+  :
+  <>
   {/* Breadcrumb Start */}
   <div className="container-fluid">
     <div className="row px-xl-5">
@@ -257,9 +264,8 @@ const makePayment = async() =>{
     </div>
   </div>
   {/* Checkout End */}
-  {/* Footer Start */}
-<Footer></Footer>
-  {/* Footer End */}
+  </>
+  }
 </div>
 
   )

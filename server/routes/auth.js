@@ -1,8 +1,28 @@
 const express = require("express");
 const router = express.Router();
-const { Login } = require("../authcontrollers/auth");
+const passport = require("passport")
+const {
+  LOGIN,
+  verifyUserAccountCtrl,
+  CreateLinkresetPasswordCtrl,
+  getResetPasswordCtrl,
+  newPasswordCtrl,
+} = require("../authcontrollers/auth");
 
+// AUTH/LOGIN
+router.post("/Login", LOGIN);
 
-router.post('/Login', Login)
+// AUTH/:userId/VERIFY/:tokens
+router.get("/:userId/VERIFY/:tokens", verifyUserAccountCtrl);
+
+// AUTH/PASSWORD/CREATELINK
+router.post("/PASSWORD/CREATELINK", CreateLinkresetPasswordCtrl);
+
+// AUTH/RESETPASSWORD
+router.get("/RESETPASSWORD/:userId/:tokens", getResetPasswordCtrl);
+
+// AUTH/RESETPASSWORD/NEWPASSWORD
+router.get("/RESETPASSWORD/NEWPASSWORD", newPasswordCtrl);
+
 
 module.exports = router;

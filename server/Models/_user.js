@@ -2,30 +2,34 @@ const mongoose = require("mongoose");
 
 const UUSERSchema = new mongoose.Schema({
 
+    googleId : String ,
+    secret : String,
+    email : String ,
+    pic : String ,
     FirstName: {
         type: String,
-        required: true,
+        required: false,
     },
 
     LastName: {
         type: String,
-        required: true,
+        required: false,
     },
 
     Email: {
         type: String,
-        required: true,
-        unique: true
+        required: false,
+        unique: false
     },
 
     Password: {
         type: String,
-        required: true
+        required: false
     },
 
     isAdmin: {
          type: Boolean,
-         default : true
+         default : false
     },
     isAccountVerified: {
         type: Boolean,

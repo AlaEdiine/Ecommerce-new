@@ -3,9 +3,9 @@ var nodemailer = require('nodemailer')
 const SendEmail = (data, req, res, next) => {
   console.log(data.name);
 var transporter = nodemailer.createTransport({
-  service: 'hotmail',
+  service: 'gmail',
   auth: {
-    user: 'ste.yoyojul@outlook.com',
+    user: 'alaeddine.alouii@gmail.com',
     pass: 'ALA9321x'
   }
 });

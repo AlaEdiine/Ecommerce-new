@@ -42,7 +42,6 @@ const Order = () => {
   
   return (
 <div>
-  <Menu></Menu>
   <SnackbarProvider autoHideDuration={2500} />
   {/* Breadcrumb Start */}
   <div className="container-fluid">
@@ -145,9 +144,6 @@ const Order = () => {
     </div>
   </div>
   {/* Cart End */}
-  {/* Footer Start */}
-<Footer></Footer>
-  {/* Footer End */}
 
 </div>
 

@@ -9720,7 +9720,6 @@ a.text-dark:hover, a.text-dark:focus {
 .msg{
   color: red;
   padding: 10px;
-  background: white;
   text-align: center;
   width: 100%;
 }
@@ -9761,6 +9760,11 @@ small{
 }
 Link{
   text-decoration: none;
+  text-transform: none;
+}
+.lien{
+  text-decoration: none;
+  text-transform: none;
 }
 .removeBtn{
   position: absolute;

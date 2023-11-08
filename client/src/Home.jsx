@@ -1,11 +1,9 @@
-import React, { useContext } from 'react'
-import Menu from './component/Menu'
-import './css/style.css'
-import { ShopContext } from './ShopContext/Shopcontext'
+import React, { useContext } from 'react';
+import './css/style.css';
+import { ShopContext } from './ShopContext/Shopcontext';
 import { SnackbarProvider } from "notistack";
-import { products, recentproducts } from './data/Products'
-import { Link } from 'react-router-dom'
-import Footer from './component/Footer'
+import { products, recentproducts } from './data/Products';
+import { Link } from 'react-router-dom';
 
 
 const Home = () => {
@@ -14,7 +12,6 @@ const Values = useContext(ShopContext)
 
   return (
 <div>
-<Menu></Menu>
 <SnackbarProvider autoHideDuration={2500} />
   {/* Carousel Start */}
   <div className="container-fluid mb-3">
@@ -282,12 +279,6 @@ const Values = useContext(ShopContext)
     </div>
   </div>
   {/* Products End */}
-
-  {/* Footer Start */}
-<Footer></Footer>
-  {/* Footer End */}
-
-
 </div>
 
   )

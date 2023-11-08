@@ -1,11 +1,9 @@
 import React, { useContext, useState } from "react";
-import Menu from "./component/Menu";
 import "./css/style.css";
 import { allproducts } from "./data/Products";
 import { SnackbarProvider } from "notistack";
 import { ShopContext } from "./ShopContext/Shopcontext";
 import { Link, useParams } from "react-router-dom";
-import Footer from "./component/Footer";
 
 const Shop = () => {
   const XSprice = allproducts.filter((produc) => produc.price < 100);
@@ -115,7 +113,6 @@ const Shop = () => {
   }
   return (
     <div>
-      <Menu></Menu>
       <SnackbarProvider autoHideDuration={2500} />
       {/* Breadcrumb Start */}
       <div className="container-fluid">
@@ -566,9 +563,6 @@ const Shop = () => {
         </div>
       </div>
       {/* Shop End */}
-      {/* Footer Start */}
-<Footer></Footer>
-      {/* Footer End */}
     </div>
   );
 };
